@@ -53,12 +53,12 @@ export default function ProfileForm({
       .from("avatars")
       .getPublicUrl(filePath);
 
-    const publicUrl = data.publicUrl;
+    const publicUrlWithTimestamp = `${data.publicUrl}?t=${Date.now()}`;
 
     const { error: updateError } = await supabase
       .from("profiles")
       .update({
-        avatar_url: publicUrl,
+        avatar_url: publicUrlWithTimestamp,
       })
       .eq("id", userId);
 
@@ -67,7 +67,7 @@ export default function ProfileForm({
       return;
     }
 
-    setAvatar(publicUrl);
+    setAvatar(publicUrlWithTimestamp);
     setMessage("Photo updated!");
   };
 
