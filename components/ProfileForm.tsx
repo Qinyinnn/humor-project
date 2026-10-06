@@ -97,29 +97,23 @@ export default function ProfileForm({
     }
 
     setMessage("Profile updated successfully!");
-
-    // Reload server-side profile data
     router.refresh();
   };
 
   return (
     <div>
       <div className="mb-10 flex flex-col items-center">
-        <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-gray-100 shadow-md">
+        <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-4 border-[#d6eafa] bg-[#174f82] shadow-[0_12px_24px_rgba(16,47,77,0.16)]">
           {avatar ? (
-            <img
-              src={avatar}
-              alt="Profile"
-              className="h-full w-full object-cover"
-            />
+            <img src={avatar} alt="Profile" className="h-full w-full object-cover" />
           ) : (
-            <span className="text-3xl font-semibold text-gray-400">
+            <span className="text-3xl font-black text-white">
               {first?.[0]?.toUpperCase() || "?"}
             </span>
           )}
         </div>
 
-        <label className="mt-4 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50">
+        <label className="mt-4 cursor-pointer rounded-full border border-[#174f82]/20 bg-white px-4 py-2 text-sm font-semibold text-[#174f82] transition hover:-translate-y-0.5 hover:border-[#174f82]/40 hover:bg-[#edf6fc]">
           Change photo
           <input
             type="file"
@@ -132,53 +126,43 @@ export default function ProfileForm({
 
       <div className="space-y-6">
         <div>
-          <label
-            htmlFor="firstName"
-            className="mb-2 block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="firstName" className="mb-2 block text-sm font-bold text-[#17283a]">
             First name
           </label>
-
           <input
             id="firstName"
             type="text"
             value={first}
             onChange={(e) => setFirst(e.target.value)}
             placeholder="Enter your first name"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 outline-none transition focus:border-black focus:ring-2 focus:ring-gray-200"
+            className="w-full rounded-2xl border border-[#174f82]/20 bg-[#f9fcfe] px-4 py-3.5 text-[#101c2a] outline-none transition focus:border-[#174f82] focus:ring-2 focus:ring-[#75aadb]/30"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="lastName"
-            className="mb-2 block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="lastName" className="mb-2 block text-sm font-bold text-[#17283a]">
             Last name
           </label>
-
           <input
             id="lastName"
             type="text"
             value={last}
             onChange={(e) => setLast(e.target.value)}
             placeholder="Enter your last name"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 outline-none transition focus:border-black focus:ring-2 focus:ring-gray-200"
+            className="w-full rounded-2xl border border-[#174f82]/20 bg-[#f9fcfe] px-4 py-3.5 text-[#101c2a] outline-none transition focus:border-[#174f82] focus:ring-2 focus:ring-[#75aadb]/30"
           />
         </div>
 
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-full rounded-xl bg-black px-4 py-3 font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-2xl bg-[#174f82] px-4 py-3.5 text-base font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#103b64] disabled:cursor-not-allowed disabled:bg-[#71879a]"
         >
           {saving ? "Saving..." : "Save changes"}
         </button>
 
         {message && (
-          <p className="text-center text-sm text-gray-600">
-            {message}
-          </p>
+          <p className="text-center text-sm text-[#405b73]">{message}</p>
         )}
       </div>
     </div>

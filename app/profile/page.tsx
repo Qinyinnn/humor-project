@@ -21,52 +21,37 @@ export default async function ProfilePage() {
     .single();
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-3xl px-6 py-10">
-
-        <nav className="mb-8 flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-sm font-medium text-gray-600 hover:text-black"
-          >
-            ← Back to Home
-          </Link>
-
-          <Link
-            href="/members"
-            className="text-sm font-medium text-gray-600 hover:text-black"
-          >
-            Members
-          </Link>
-        </nav>
-
-        <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
-          <div className="border-b border-gray-100 px-8 py-7">
-            <h1 className="text-3xl font-semibold tracking-tight">
+    <main className="min-h-screen bg-[#e8f3fb] px-4 py-8 text-[#101c2a] sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl">
+        <header className="mb-6 flex flex-col gap-4 rounded-[28px] bg-[#174f82] p-5 text-white shadow-[0_22px_50px_rgba(16,47,77,0.18)] sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#a9d5f8]">
               Your profile
-            </h1>
-
-            <p className="mt-2 text-gray-500">
-              Manage your personal information and profile photo.
             </p>
+            <h1 className="mt-2 text-3xl font-black tracking-[-0.05em] text-white">
+              Update your Columbia profile
+            </h1>
           </div>
 
-          <div className="px-8 py-8">
-            <div className="mb-8 rounded-xl bg-gray-50 px-4 py-3">
-              <p className="text-xs font-medium uppercase tracking-wide text-gray-400">
-                Signed in as
-              </p>
+          <div className="flex items-center gap-2 text-sm font-medium">
+            <Link href="/" className="rounded-full border border-white/30 bg-white/10 px-3 py-2 text-white transition hover:bg-white/20">
+              ← Feed
+            </Link>
+          </div>
+        </header>
 
-              <p className="mt-1 text-sm font-medium text-gray-700">
-                {user.email}
-              </p>
-            </div>
+        <div className="overflow-hidden rounded-[30px] border border-[#174f82]/15 bg-white shadow-[0_20px_50px_rgba(16,47,77,0.1)]">
+          <div className="border-b border-[#174f82]/10 px-5 py-6 sm:px-8">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#174f82]">
+              Account
+            </p>
+            <p className="mt-2 text-sm text-[#5e7388]">Signed in as {user.email}</p>
+          </div>
 
+          <div className="px-5 py-6 sm:px-8 sm:py-8">
             {!profile?.first_name || !profile?.last_name ? (
-              <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
-                <p className="text-sm text-amber-800">
-                  Please complete your first and last name.
-                </p>
+              <div className="mb-6 rounded-2xl border border-[#75aadb]/40 bg-[#edf6fc] px-4 py-3 text-sm font-medium text-[#174f82]">
+                Please complete your first and last name.
               </div>
             ) : null}
 
