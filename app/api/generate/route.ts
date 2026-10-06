@@ -1,11 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
-const client = new OpenAI({
-  baseURL: "https://api.deepseek.com",
-  apiKey: process.env.DEEPSEEK_API_KEY,
-});
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -24,6 +19,11 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    const client = new OpenAI({
+      baseURL: "https://api.deepseek.com",
+      apiKey: process.env.DEEPSEEK_API_KEY,
+    });
 
     const aiPrompt = `
     You are writing content for a website called Columbia Survival Guide.
