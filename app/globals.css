@@ -73,9 +73,50 @@ img {
 }
 
 .editorial-card:hover {
-  transform: translateY(-3px) rotate(-0.15deg);
-  box-shadow: 0 26px 56px rgba(16, 47, 77, 0.13);
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(16, 47, 77, 0.13);
   border-color: rgba(23, 79, 130, 0.26);
+}
+
+button:not(:disabled),
+a[href],
+label[for] {
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+button:not(:disabled):hover,
+a[href]:hover,
+label[for]:hover {
+  translate: 0 -1px;
+  filter: drop-shadow(0 4px 5px rgba(16, 47, 77, 0.1));
+}
+
+button:not(:disabled):active,
+a[href]:active,
+label[for]:active {
+  translate: 0 0;
+  scale: 0.98;
+}
+
+button:focus-visible,
+a[href]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+label[for]:focus-visible {
+  outline: 3px solid rgba(117, 170, 219, 0.65);
+  outline-offset: 3px;
+}
+
+input,
+textarea,
+select {
+  transition-duration: 180ms;
+  transition-timing-function: ease-out;
+}
+
+.reaction-pop {
+  animation: reaction-pop 240ms cubic-bezier(0.2, 0.8, 0.25, 1.25);
 }
 
 .blueprint-dots {
@@ -92,6 +133,12 @@ img {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes reaction-pop {
+  0% { scale: 0.86; }
+  65% { scale: 1.12; }
+  100% { scale: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

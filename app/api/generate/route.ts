@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     - playful, casual, and slightly dramatic
     - appropriate for a college audience
 
-    Lean into humor while still giving genuinely useful advice. The response should feel like something a funny, experienced upperclassman or chronically online friend would say—playful and witty.
+    Lean into humor while still giving genuinely useful advice. The response should feel like something a funny, experienced upperclassman or chronically online friend would say—playful and witty, and written specifically for a Columbia University student.
 
     Use natural line breaks to make the response easy to scan. Break the advice into short lines or mini-paragraphs when appropriate instead of writing one dense paragraph.
 

@@ -29,25 +29,31 @@ export default function VoteButtons({
   const [error, setError] = useState("");
 
   async function handleVote(value: number) {
+    // Clicking the selected option removes the user's vote.
+    const nextVote = userVote === value ? null : value;
     const previousVote = userVote;
     const previousHelpfulFunnyCount = helpfulFunnyCount;
     const previousDoesntHitCount = doesntHitCount;
 
     if (previousVote === null) {
-      if (value === 1) {
+      if (nextVote === 1) {
         setHelpfulFunnyCount((count) => count + 1);
-      } else {
+      } else if (nextVote === 0) {
         setDoesntHitCount((count) => count + 1);
       }
-    } else if (previousVote === 1 && value === 0) {
+    } else if (previousVote === 1 && nextVote === 0) {
       setHelpfulFunnyCount((count) => count - 1);
       setDoesntHitCount((count) => count + 1);
-    } else if (previousVote === 0 && value === 1) {
+    } else if (previousVote === 0 && nextVote === 1) {
       setDoesntHitCount((count) => count - 1);
       setHelpfulFunnyCount((count) => count + 1);
+    } else if (previousVote === 1 && nextVote === null) {
+      setHelpfulFunnyCount((count) => count - 1);
+    } else if (previousVote === 0 && nextVote === null) {
+      setDoesntHitCount((count) => count - 1);
     }
 
-    setUserVote(value);
+    setUserVote(nextVote);
     setLoading(true);
     setError("");
 
@@ -69,18 +75,24 @@ export default function VoteButtons({
         return;
       }
 
-      const { error: voteError } = await supabase
-        .from("votes")
-        .upsert(
-          {
-            user_id: user.id,
-            post_id: postId,
-            vote_value: value,
-          },
-          {
-            onConflict: "user_id,post_id",
-          }
-        );
+      const { error: voteError } = nextVote === null
+        ? await supabase
+            .from("votes")
+            .delete()
+            .eq("user_id", user.id)
+            .eq("post_id", postId)
+        : await supabase
+            .from("votes")
+            .upsert(
+              {
+                user_id: user.id,
+                post_id: postId,
+                vote_value: nextVote,
+              },
+              {
+                onConflict: "user_id,post_id",
+              }
+            );
 
       if (voteError) {
         throw voteError;
@@ -112,7 +124,7 @@ export default function VoteButtons({
           disabled={loading}
           className={`${baseClasses} ${
             userVote === 1
-              ? "border-[#174f82] bg-[#d6eafa] text-[#103b64] shadow-[0_5px_14px_rgba(23,79,130,0.15)]"
+              ? "reaction-pop border-[#174f82] bg-[#d6eafa] text-[#103b64] shadow-[0_5px_14px_rgba(23,79,130,0.15)]"
               : "border-[#174f82]/20 bg-white text-[#33465a] hover:border-[#75aadb] hover:bg-[#edf6fc]"
           }`}
         >
@@ -124,7 +136,7 @@ export default function VoteButtons({
           disabled={loading}
           className={`${baseClasses} ${
             userVote === 0
-              ? "border-[#174f82] bg-[#174f82] text-white shadow-[0_5px_14px_rgba(23,79,130,0.2)]"
+              ? "reaction-pop border-[#174f82] bg-[#174f82] text-white shadow-[0_5px_14px_rgba(23,79,130,0.2)]"
               : "border-[#174f82]/20 bg-white text-[#33465a] hover:border-[#75aadb] hover:bg-[#edf6fc]"
           }`}
         >

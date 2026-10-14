@@ -73,9 +73,10 @@ export default async function MyPostsPage() {
 
         {!posts || posts.length === 0 ? (
           <div className="rounded-[30px] border border-[#174f82]/15 bg-white p-8 text-center shadow-[0_18px_40px_rgba(16,47,77,0.08)]">
-            <h2 className="text-2xl font-bold text-[#101c2a]">You haven’t posted anything yet.</h2>
+            <p className="mb-3 text-4xl" aria-hidden="true">📭</p>
+            <h2 className="text-2xl font-bold text-[#101c2a]">Your dispatch folder is empty.</h2>
             <p className="mt-3 text-base text-[#5e7388]">
-              Generate some survival advice and share it with the community.
+              Turn today’s campus chaos into tomorrow’s survival lore.
             </p>
             <Link
               href="/generate"

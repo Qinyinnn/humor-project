@@ -22,7 +22,7 @@ export default function GoogleSignInButton() {
       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-sm font-black text-[#174f82]">
         G
       </span>
-      Continue with Google
+      Continue with Your School Email
     </button>
   );
 }

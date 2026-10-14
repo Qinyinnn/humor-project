@@ -64,7 +64,9 @@ export default async function FeedPage() {
 
         {!posts || posts.length === 0 ? (
           <div className="rounded-[28px] border border-[#174f82]/15 bg-white p-8 text-center shadow-[0_18px_40px_rgba(16,47,77,0.08)]">
-            <h2 className="text-2xl font-bold text-[#101c2a]">No survival advice has been posted yet.</h2>
+            <p className="mb-3 text-4xl" aria-hidden="true">🦉☕</p>
+            <h2 className="text-2xl font-bold text-[#101c2a]">The feed is suspiciously calm.</h2>
+            <p className="mt-2 text-[#5e7388]">No dispatches from the Columbia chaos desk yet.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-8">

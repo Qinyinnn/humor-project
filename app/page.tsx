@@ -6,6 +6,8 @@ import { formatSurvivalAdvice } from "@/lib/format-survival-advice";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 import SignOutButton from "@/components/SignOutButton";
 import VoteButtons from "./feed/VoteButtons";
+import AuthNotice from "@/components/AuthNotice";
+import CommentsSection from "./feed/CommentsSection";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -29,6 +31,7 @@ export default async function Home() {
   if (!user) {
     return (
       <main className="min-h-screen overflow-hidden bg-[#e8f3fb] text-[#101c2a]">
+        <AuthNotice />
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-10">
           <header className="mb-12 flex items-center justify-between gap-4 border-b border-[#174f82]/15 pb-5">
             <div className="flex items-center gap-3">
@@ -193,9 +196,10 @@ export default async function Home() {
 
         {!posts || posts.length === 0 ? (
           <div className="rounded-[28px] border border-[#174f82]/15 bg-white p-8 text-center shadow-[0_18px_40px_rgba(16,47,77,0.08)]">
-            <h3 className="text-2xl font-bold text-[#101c2a]">No survival advice yet.</h3>
+            <p className="mb-3 text-4xl" aria-hidden="true">🦉☕</p>
+            <h3 className="text-2xl font-bold text-[#101c2a]">The feed is suspiciously calm.</h3>
             <p className="mt-3 text-base text-[#5e7388]">
-              Be the first person to share a Columbia crisis.
+              Be the first to turn a Columbia crisis into a campus dispatch.
             </p>
             <Link
               href="/generate"
@@ -254,6 +258,7 @@ export default async function Home() {
                     initialDoesntHit={doesntHitCount}
                     initialUserVote={currentUserVote}
                   />
+                  <CommentsSection postId={post.id} />
                   </div>
                 </article>
               );

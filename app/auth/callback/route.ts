@@ -25,6 +25,20 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/`);
   }
 
+  const email = user.email?.toLowerCase();
+  const emailDomain = email?.split("@").pop();
+  const allowedDomains = new Set(["columbia.edu", "barnard.edu", "alum.barnard.edu"]);
+
+  if (
+    !email ||
+    !user.email_confirmed_at ||
+    !emailDomain ||
+    !allowedDomains.has(emailDomain)
+  ) {
+    await supabase.auth.signOut();
+    return NextResponse.redirect(`${origin}/?authError=columbia-email-required`);
+  }
+
   const { data: profile } = await supabase
     .from("profiles")
     .select("first_name, last_name")
