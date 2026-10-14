@@ -6,7 +6,6 @@ import { formatSurvivalAdvice } from "@/lib/format-survival-advice";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 import SignOutButton from "@/components/SignOutButton";
 import VoteButtons from "./feed/VoteButtons";
-import AuthNotice from "@/components/AuthNotice";
 import CommentsSection from "./feed/CommentsSection";
 
 export default async function Home() {
@@ -31,7 +30,6 @@ export default async function Home() {
   if (!user) {
     return (
       <main className="min-h-screen overflow-hidden bg-[#e8f3fb] text-[#101c2a]">
-        <AuthNotice />
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-10">
           <header className="mb-12 flex items-center justify-between gap-4 border-b border-[#174f82]/15 pb-5">
             <div className="flex items-center gap-3">
