@@ -35,7 +35,18 @@ export async function GET(request: Request) {
     !emailDomain ||
     !allowedDomains.has(emailDomain)
   ) {
-    await supabase.auth.signOut();
+    const { error: signOutError } = await supabase.auth.signOut({ scope: "local" });
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+    if (signOutError) {
+      console.error("Rejected Google sign-in sign-out returned an error:", signOutError);
+    }
+
+    if (sessionError || session) {
+      console.error("Could not verify rejected Google sign-in session was cleared:", sessionError);
+      return new NextResponse("Could not clear the rejected sign-in session. Please try again.", { status: 500 });
+    }
+
     return NextResponse.redirect(`${origin}/?authError=columbia-email-required`);
   }
 
