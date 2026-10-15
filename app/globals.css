@@ -78,6 +78,11 @@ img {
   border-color: rgba(23, 79, 130, 0.26);
 }
 
+.editorial-card:has([aria-label="Add a reaction"][aria-expanded="true"]) {
+  position: relative;
+  z-index: 10;
+}
+
 button:not(:disabled),
 a[href],
 label[for] {
